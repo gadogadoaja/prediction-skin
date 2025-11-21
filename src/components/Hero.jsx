@@ -14,28 +14,28 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section id="home" className="relative pt-32 pb-20 overflow-hidden lg:pt-48 lg:pb-32">
       <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-bl from-teal-50 to-white rounded-bl-[100px] opacity-50"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="grid items-center gap-12 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:grid-cols-2">
         <div className="space-y-8">
           <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-100 text-teal-700 px-4 py-1.5 rounded-full text-sm font-semibold">
             <Activity size={16} />
-            <span>Teknologi AI Kesehatan Terkini v2.4</span>
+            <span>Teknologi AI Kesehatan Terkini</span>
           </div>
-          <h1 className="text-4xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+          <h1 className="text-4xl font-extrabold leading-tight lg:text-6xl text-slate-900">
             Deteksi Dini Kesehatan Kulit dengan <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Kecerdasan Buatan</span>
           </h1>
-          <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
-            Analisis kondisi kulit Anda dalam hitungan detik menggunakan teknologi Computer Vision yang telah divalidasi oleh dermatolog. Cepat, privat, dan akurat.
+          <p className="max-w-xl text-lg leading-relaxed text-slate-600">
+            Analisis kondisi kulit Anda dalam hitungan detik menggunakan teknologi Computer Vision dan Generative AI yang telah divalidasi oleh dermatolog. Cepat, privat, dan akurat.
           </p>
           
           {/* --- BAGIAN TOMBOL DIPERBAIKI DI SINI --- */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             {/* Tombol 1: Ke Scanner */}
             <a 
               href="#scan" 
               onClick={(e) => scrollToSection(e, 'scan')}
-              className="inline-flex justify-center items-center gap-2 bg-teal-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-teal-700 transition shadow-xl shadow-teal-600/20"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white transition bg-teal-600 shadow-xl rounded-xl hover:bg-teal-700 shadow-teal-600/20"
             >
               <Camera size={20} />
               Mulai Analisis
@@ -45,18 +45,18 @@ const Hero = () => {
             <a 
               href="#how-it-works" 
               onClick={(e) => scrollToSection(e, 'how-it-works')}
-              className="inline-flex justify-center items-center gap-2 bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold transition bg-white border cursor-pointer text-slate-700 border-slate-200 rounded-xl hover:bg-slate-50"
             >
               Pelajari Cara Kerja
             </a>
           </div>
           {/* ---------------------------------------- */}
 
-          <div className="flex items-center gap-4 text-sm text-slate-500 pt-4">
+          <div className="flex items-center gap-4 pt-4 text-sm text-slate-500">
             <div className="flex -space-x-2">
               {[1,2,3,4].map((i) => (
-                <div key={i} className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden">
-                   <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
+                <div key={i} className="w-8 h-8 overflow-hidden border-2 border-white rounded-full bg-slate-200">
+                   <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="object-cover w-full h-full" />
                 </div>
               ))}
             </div>
@@ -64,7 +64,7 @@ const Hero = () => {
           </div>
         </div>
         <div className="relative">
-          <div className="relative z-10 bg-white rounded-3xl shadow-2xl p-6 border border-slate-100 transform rotate-2 hover:rotate-0 transition duration-500">
+          <div className="relative z-10 p-6 transition duration-500 transform bg-white border shadow-2xl rounded-3xl border-slate-100 rotate-2 hover:rotate-0">
              <img 
               src="/model/foto/health2.jpg" 
               alt="Dermatology AI Interface" 
@@ -72,8 +72,8 @@ const Hero = () => {
             />
           </div>
           {/* Decorative Circles */}
-          <div className="absolute -top-10 -right-10 w-64 h-64 bg-teal-100 rounded-full blur-3xl opacity-50 -z-10"></div>
-          <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-50 -z-10"></div>
+          <div className="absolute w-64 h-64 bg-teal-100 rounded-full opacity-50 -top-10 -right-10 blur-3xl -z-10"></div>
+          <div className="absolute w-64 h-64 bg-blue-100 rounded-full opacity-50 -bottom-10 -left-10 blur-3xl -z-10"></div>
         </div>
       </div>
     </section>

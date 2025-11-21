@@ -223,10 +223,10 @@ const AIScanner = () => {
       <div className="relative z-10 max-w-4xl px-4 mx-auto">
         <div className="mb-12 text-center">
           <span className={`inline-block py-1 px-3 rounded-full text-xs font-bold tracking-wide uppercase mb-4 ${modelLoading ? 'bg-yellow-500/20 text-yellow-300' : 'bg-teal-500/20 text-teal-300'}`}>
-            {modelLoading ? "Memuat Model AI..." : "• Dual AI Core Ready"}
+            {modelLoading ? "Memuat Model AI..." : "•  AI Core Ready"}
           </span>
           <h2 className="mt-2 mb-4 text-3xl font-bold md:text-4xl">AI Skin Detector + Smart Doctor</h2>
-          <p className="text-slate-300">Kombinasi Computer Vision untuk melihat & Generative AI untuk menjelaskan.</p>
+          <p className="text-slate-300">Kombinasi Computer Vision & Generative AI</p>
         </div>
 
         <div className="p-6 border shadow-2xl bg-slate-800 rounded-3xl md:p-8 border-slate-700">
