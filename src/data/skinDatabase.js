@@ -2,7 +2,7 @@
 // Gemini akan menggunakan data ini sebagai referensi utama
 
 export const skinKnowledgeBase = {
-  'Blackheads ': {
+    'Blackheads': {
     description: "Bintik kecil hitam di permukaan kulit. Pori tersumbat tapi masih “terbuka”, sehingga sebum & kotoran teroksidasi → warnanya jadi hitam, bukan karena “kotoran” semata.",
     causes: "Produksi sebum berlebih, sel kulit mati menumpuk, Skincare / make up yang menyumbat pori (comedogenic), Jarang eksfoliasi / cleansing kurang optimal.",
     treatments: "Gunakan pembersih wajah yang lembut, obat jerawat yang mengandung BHA (salicylic acid) dan Retinoid topikal untuk bantu menarik minyak berlebih. Jangan memencet jerawat.",
@@ -28,14 +28,8 @@ export const skinKnowledgeBase = {
   },
   'Whiteheads': {
     description: "Benjolan kecil putih atau sewarna kulit, permukaan tertutup. Pori tersumbat tapi “tertutup kulit”, sehingga isinya (sebum + sel kulit) tidak teroksidasi dan tetap putih.",
-    causes: "Tidak diketahui pasti, mungkin faktor keturunan dan lingkungan. Pemicu: makanan pedas, panas, alkohol.",
-    treatments: "Hindari pemicu, gunakan tabir surya (sunscreen), gel brimonidine, antibiotik (jika perlu).",
-    urgency: "Sedang."
-  },
-  'Normal': {
-    description: "Kondisi kulit sehat tanpa kelainan patologis yang terlihat.",
-    causes: "-",
-    treatments: "Pertahankan kebersihan, gunakan pelembab dan tabir surya setiap hari.",
-    urgency: "Tidak ada."
+    causes: "Sebum berlebih, penumpukan sel kulit mati, produk kulit yang yang terlalu berat dan bisa dipicu perubahan hormon & gaya hidup.",
+    treatments: "BHA (salicylic acid) atau AHA (glycolic/lactic) untuk eksfoliasi, hindari krim terlalu berat kalau kulit berminyak, jangan dipencet pakai kuku (risiko infeksi dan scar).",
+    urgency: "Sedang, Kalau banyak sekali & bikin tekstur kulit sangat tidak rata segera konsultasi dokter."
   }
 };
