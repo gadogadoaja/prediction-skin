@@ -23,7 +23,7 @@ const Hero = () => {
             <span>Teknologi AI Kesehatan Terkini</span>
           </div>
           <h1 className="text-4xl font-extrabold leading-tight lg:text-6xl text-slate-900">
-            Deteksi Dini Kesehatan Kulit dengan <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Kecerdasan Buatan</span>
+            Smart Skin  <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Analysis</span>
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-slate-600">
             Analisis kondisi kulit Anda dalam hitungan detik menggunakan teknologi Computer Vision dan Generative AI yang telah divalidasi oleh dermatolog. Cepat, privat, dan akurat.
