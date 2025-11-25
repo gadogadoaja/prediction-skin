@@ -1,7 +1,7 @@
 import React from 'react';
 // Import komponen UI
 import Navbar from './components/Navbar';
-import Hero from './components/hero';
+import Hero from './components/Hero';
 import Features from './components/Features';
 import Doctors from './components/Doctors';
 import Footer from './components/Footer';
@@ -12,7 +12,7 @@ import AIScanner from './components/AIScanner';
 
 export default function App() {
   return (
-    <div className="font-sans text-slate-800 bg-white scroll-smooth">
+    <div className="font-sans bg-white text-slate-800 scroll-smooth">
       {/* 1. Menu Navigasi Paling Atas */}
       <Navbar />
       
