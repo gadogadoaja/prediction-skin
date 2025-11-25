@@ -24,12 +24,50 @@ const AIScanner = () => {
 
   // DAFTAR KELAS (Harus urut sesuai model Python)
   const CLASSES = [
-    'Blackheads', 
-    'Cyst', 
-    'Papules', 
-    'Pustules',
-    'Whiteheads'
+'Actinic keratosis',
+'Atopic Dermatitis',
+'Basal mCell Carcinoma',
+'Benign Keratosis',
+'Blackheads',
+'Bullous',
+'Candidiasis',
+'Cyst',
+'Dermatofibroma',
+'Drug Eruption',
+'Eczema',
+'Infestations and Bites',
+'Lichen',
+'Lupus',
+'Melanocytic Nevus',
+'Melanoma',
+'Moles',
+'Nodules',
+'Papules',
+'Psoriasis',
+'Pustules',
+'Rosacea',
+'Seaborrheic Keratosis',
+'Squamous Cell Carcinoma',
+'Sun Sunlight Damage',
+'Tinea',
+'Unknown Normal',
+'Urticaria Hives',
+'Vascular Lesion',
+'Vascular Tumors',
+'Vasculitis',
+'Vitiligo',
+'Warts',
+'Warts Molluscum',
+'Whiteheads'
   ];
+
+  //const CLASSES = [
+  // 'Blackheads', 
+  //  'Cyst', 
+  //  'Papules', 
+  //  'Pustules',
+  //  'Whiteheads'
+  //];
 
   // --- FUNGSI LOADER MANUAL (Anti-Error Keras v3) ---
   const loadModelManual = async () => {
@@ -144,11 +182,32 @@ const AIScanner = () => {
       try {
         // 1. PREDIKSI VISUAL (TensorFlow)
         const tensor = tf.tidy(() => {
-          let img = tf.browser.fromPixels(imageRef.current);
-          img = tf.image.resizeBilinear(img, [224, 224]); 
-          img = img.div(tf.scalar(255.0));
-          return img.expandDims(0);
+        // 1. Ambil pixel dari gambar
+        let img = tf.browser.fromPixels(imageRef.current);
+
+        // 2. Resize ke 224x224
+        img = tf.image.resizeBilinear(img, [224, 224]); 
+
+        // 3. PREPROCESSING YANG BENAR (Range -1 s/d 1)
+        // Rumus MobileNetV2: (pixel - 127.5) / 127.5
+        // Atau: (pixel / 127.5) - 1
+    
+        img = img.toFloat(); // Ubah ke float dulu agar presisi
+    
+        // Opsi A (Paling umum untuk MobileNet):
+        const offset = tf.scalar(127.5);
+          img = img.sub(offset).div(offset); 
+
+        // 4. Tambah dimensi batch (menjadi [1, 224, 224, 3])
+        return img.expandDims(0);
         });
+
+        //const tensor = tf.tidy(() => {
+        //  let img = tf.browser.fromPixels(imageRef.current);
+        //  img = tf.image.resizeBilinear(img, [224, 224]); 
+        //  img = img.div(tf.scalar(255.0));
+        //  return img.expandDims(0);
+        //});
 
         let prediction;
         if (model.predict) {
