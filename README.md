@@ -24,7 +24,9 @@ Masuk ke folder backend, lalu:
 Buat file .env, isi dengan:
 
 -PORT=5000
+
 -GEMINI_API_KEY=MASUKKAN_KEY_GEMINI_DISINI
+
 -CHROMA_DB_URL=http://localhost:8000
 
 
@@ -35,14 +37,14 @@ Isi Database:
 
 Jalanin Server:
 
-npm start
+-npm start
 
 
 3️⃣ Terminal 3: Frontend
 
 Masuk ke folder root (folder utama), lalu:
 
-npm run dev
+-npm run dev
 
 
 Selamat bekerja gess! 🚀
