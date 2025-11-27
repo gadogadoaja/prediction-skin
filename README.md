@@ -36,11 +36,3 @@ Di terminal folder root (utama):
 > npm run dev <
 
 SELAMAT BEKERJA GESS
-
-Error "API Key not valid": Cek file .env kamu, pastikan key-nya benar dan tidak ada spasi.
-
-Chatbot Error "Database belum siap": Pastikan Docker jalan DAN kamu sudah menjalankan langkah Seeding (Langkah 4).
-
-Scanner Error: Pastikan backend server (port 5000) sedang menyala.
-
-Selamat mencoba! 🚀
