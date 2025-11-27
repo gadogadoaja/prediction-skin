@@ -6,7 +6,7 @@ const Features = () => {
     {
       icon: <Brain className="w-8 h-8 text-teal-600" />,
       title: "Deep Learning AI",
-      desc: "Model kami dilatih dengan lebih dari 2 juta gambar klinis untuk mendeteksi 15+ jenis penyakit kulit umum."
+      desc: "Model kami dilatih dengan lebih dari 2 juta gambar klinis untuk mendeteksi 30+ jenis penyakit kulit umum."
     },
     {
       icon: <ShieldCheck className="w-8 h-8 text-teal-600" />,
@@ -22,19 +22,19 @@ const Features = () => {
 
   return (
     <section id="technology" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Teknologi Medis Masa Depan</h2>
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto mb-16 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-slate-900">Teknologi Medis Masa Depan</h2>
           <p className="text-slate-600">Kombinasi keahlian dermatologi klinis dengan kecepatan komputasi modern.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-3">
           {features.map((f, i) => (
-            <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition duration-300 group">
-              <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition">
+            <div key={i} className="p-8 transition duration-300 border rounded-2xl bg-slate-50 border-slate-100 hover:shadow-xl hover:border-teal-100 group">
+              <div className="flex items-center justify-center w-16 h-16 mb-6 transition bg-white shadow-sm rounded-2xl group-hover:scale-110">
                 {f.icon}
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">{f.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{f.desc}</p>
+              <h3 className="mb-3 text-xl font-bold text-slate-900">{f.title}</h3>
+              <p className="leading-relaxed text-slate-600">{f.desc}</p>
             </div>
           ))}
         </div>

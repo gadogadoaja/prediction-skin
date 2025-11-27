@@ -22,21 +22,21 @@ const Doctors = () => {
 
   return (
     <section id="doctors" className="py-20 bg-teal-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex flex-col items-end justify-between mb-12 md:flex-row">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">Tim Dokter Ahli</h2>
+            <h2 className="mb-2 text-3xl font-bold text-slate-900">Tim Dokter Ahli</h2>
             <p className="text-slate-600">Validator medis dibalik algoritma AI kami.</p>
           </div>
-          <a href="#" className="text-teal-600 font-semibold flex items-center mt-4 md:mt-0 hover:gap-2 transition-all">
+          <a href="#" className="flex items-center mt-4 font-semibold text-teal-600 transition-all md:mt-0 hover:gap-2">
             Lihat Semua <ChevronRight size={20} />
           </a>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid gap-6 md:grid-cols-3">
           {doctorsList.map((doc, i) => (
-            <div key={i} className="bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-teal-50">
+            <div key={i} className="p-4 transition bg-white border shadow-sm rounded-2xl hover:shadow-md border-teal-50">
               <div className="flex items-center gap-4">
-                <img src={doc.img} alt={doc.name} className="w-16 h-16 rounded-full object-cover" />
+                <img src={doc.img} alt={doc.name} className="object-cover w-16 h-16 rounded-full" />
                 <div>
                   <h4 className="font-bold text-slate-900">{doc.name}</h4>
                   <p className="text-sm text-teal-600">{doc.role}</p>

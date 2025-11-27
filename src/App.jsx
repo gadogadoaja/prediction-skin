@@ -6,34 +6,35 @@ import Features from './components/Features';
 import Doctors from './components/Doctors';
 import Footer from './components/Footer';
 import HowItWorks from './components/HowItWorks';
-// Import komponen AI (Otak utamanya)
-// Pastikan file AIScanner.jsx sudah berisi logika TensorFlow yang baru
-import AIScanner from './components/AIScanner';
+import ChatBot from './components/ChatBot';  // Import komponen AI 
+import AIScanner from './components/AIScanner'; // Import from AIScanner
 
 export default function App() {
   return (
     <div className="font-sans bg-white text-slate-800 scroll-smooth">
-      {/* 1. Menu Navigasi Paling Atas */}
+      {/* Menu Navigasi */}
       <Navbar />
       
-      {/* 2. Bagian Judul Besar (Hero) */}
+      {/* Konten */}
       <Hero />
       
-      {/* 3. Penjelasan Fitur */}
+      {/* Penjelasan Fitur */}
       <Features />
       
-      {/* 4. Penjelasan Fitur */}
+      {/* Pejelasan Penggunaan Aplikasi*/}
       <HowItWorks />
 
-      {/* 5. BAGIAN AI SCANNER (Memanggil file AIScanner.jsx) */}
-      {/* Di sinilah logika deteksi kulit yang asli berjalan */}
+      {/* AI SCANNER  */}
       <AIScanner />
       
-      {/* 6. Daftar Dokter */}
+      {/* Daftar Dokter */}
       <Doctors />
       
-      {/* 7. Bagian Kaki Website */}
+      {/* Footer*/}
       <Footer />
+
+      {/* ChatBot */}
+      <ChatBot />
     </div>
   );
 }

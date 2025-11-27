@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Upload, Scan, CheckCircle, AlertTriangle, Activity, Sparkles } from 'lucide-react';
+import { Upload, Scan, CheckCircle, Activity, Sparkles } from 'lucide-react';
 import * as tf from '@tensorflow/tfjs';
-import ReactMarkdown from 'react-markdown'; // Pastikan sudah install: npm install react-markdown
-
-// Import Knowledge Base & Gemini Service
-import { skinKnowledgeBase } from '../data/skinDatabase';
-import { askGeminiSkinDoctor } from '../utils/geminiService';
+import ReactMarkdown from 'react-markdown'; 
+import { analyzeSkinCondition } from '../utils/geminiService';  // import service backend 
 
 const AIScanner = () => {
   const [image, setImage] = useState(null);
@@ -14,62 +11,53 @@ const AIScanner = () => {
   const [result, setResult] = useState(null);
   const [model, setModel] = useState(null);
   const [modelLoading, setModelLoading] = useState(true);
-  
-  // State untuk LLM (Gemini)
-  const [geminiAnalysis, setGeminiAnalysis] = useState("");
+   
+  const [geminiAnalysis, setGeminiAnalysis] = useState("");   // State LLM (Gemini)
   const [loadingGemini, setLoadingGemini] = useState(false);
   const [showFullAnalysis, setShowFullAnalysis] = useState(false);
 
   const imageRef = useRef(null);
 
-  // DAFTAR KELAS (Harus urut sesuai model Python)
+  // DAFTAR KELAS (Harus urut sesuai model yang ada di Notebook )
   const CLASSES = [
-'Actinic keratosis',
-'Atopic Dermatitis',
-'Basal mCell Carcinoma',
-'Benign Keratosis',
-'Blackheads',
-'Bullous',
-'Candidiasis',
-'Cyst',
-'Dermatofibroma',
-'Drug Eruption',
-'Eczema',
-'Infestations and Bites',
-'Lichen',
-'Lupus',
-'Melanocytic Nevus',
-'Melanoma',
-'Moles',
-'Nodules',
-'Papules',
-'Psoriasis',
-'Pustules',
-'Rosacea',
-'Seaborrheic Keratosis',
-'Squamous Cell Carcinoma',
-'Sun Sunlight Damage',
-'Tinea',
-'Unknown Normal',
-'Urticaria Hives',
-'Vascular Lesion',
-'Vascular Tumors',
-'Vasculitis',
-'Vitiligo',
-'Warts',
-'Warts Molluscum',
-'Whiteheads'
+    'Actinic keratosis',
+    'Atopic Dermatitis',
+    'Basal Cell Carcinoma',
+    'Benign Keratosis',
+    'Blackheads',
+    'Bullous',
+    'Candidiasis',
+    'Cyst',
+    'Dermatofibroma',
+    'Drug Eruption',
+    'Eczema',
+    'Infestations and Bites',
+    'Lichen',
+    'Lupus',
+    'Melanocytic Nevus',
+    'Melanoma',
+    'Moles',
+    'Nodules',
+    'Papules',
+    'Psoriasis',
+    'Pustules',
+    'Rosacea',
+    'Seaborrheic Keratosis',
+    'Squamous Cell Carcinoma',
+    'Sun Sunlight Damage',
+    'Tinea',
+    'Unknown Normal',
+    'Urticaria Hives',
+    'Vascular Lesion',
+    'Vascular Tumors',
+    'Vasculitis',
+    'Vitiligo',
+    'Warts',
+    'Warts Molluscum',
+    'Whiteheads'
   ];
 
-  //const CLASSES = [
-  // 'Blackheads', 
-  //  'Cyst', 
-  //  'Papules', 
-  //  'Pustules',
-  //  'Whiteheads'
-  //];
-
-  // --- FUNGSI LOADER MANUAL (Anti-Error Keras v3) ---
+  // FUNGSI LOADER MANUAL  ---
   const loadModelManual = async () => {
     const modelUrl = '/model/model.json';
     const weightBaseUrl = `${window.location.origin}/model/`;
@@ -79,7 +67,7 @@ const AIScanner = () => {
       const response = await fetch(modelUrl);
       const modelJSON = await response.json();
 
-      // Patch Input Shape jika hilang
+      // Patch Input Shape 
       const inputShape = [null, 224, 224, 3];
       const patchLayer = (layers) => {
         if (layers && layers[0] && layers[0].config && !layers[0].config.batch_input_shape) {
@@ -133,11 +121,11 @@ const AIScanner = () => {
     }
   };
 
-  // Load Model saat Start
+  // Load Model 
   useEffect(() => {
     const initModel = async () => {
       try {
-        // Coba GraphModel dulu
+        // GraphModel
         try {
             const loadedModel = await tf.loadGraphModel('/model/model.json');
             setModel(loadedModel);
@@ -169,7 +157,7 @@ const AIScanner = () => {
     }
   };
 
-  // --- LOGIKA UTAMA (TF + RAG) ---
+  // LOGIKA UTAMA (TF + RAG) 
   const startAnalysis = async () => {
     if (!model || !imageRef.current) return;
     setAnalyzing(true);
@@ -180,42 +168,27 @@ const AIScanner = () => {
     // Delay simulasi UI
     setTimeout(async () => {
       try {
-        // 1. PREDIKSI VISUAL (TensorFlow)
+        // PREDIKSI VISUAL (TensorFlow)
         const tensor = tf.tidy(() => {
-        // 1. Ambil pixel dari gambar
+        // Ambil pixel dari gambar
         let img = tf.browser.fromPixels(imageRef.current);
-
-        // 2. Resize ke 224x224
+        // Resize Image input user 224x224
         img = tf.image.resizeBilinear(img, [224, 224]); 
-
-        // 3. PREPROCESSING YANG BENAR (Range -1 s/d 1)
-        // Rumus MobileNetV2: (pixel - 127.5) / 127.5
-        // Atau: (pixel / 127.5) - 1
-    
-        img = img.toFloat(); // Ubah ke float dulu agar presisi
-    
-        // Opsi A (Paling umum untuk MobileNet):
+        // PREPROCESSING (Range -1,1)
+        img = img.toFloat(); 
         const offset = tf.scalar(127.5);
           img = img.sub(offset).div(offset); 
 
-        // 4. Tambah dimensi batch (menjadi [1, 224, 224, 3])
+        // Tambah dimensi batch
         return img.expandDims(0);
         });
-
-        //const tensor = tf.tidy(() => {
-        //  let img = tf.browser.fromPixels(imageRef.current);
-        //  img = tf.image.resizeBilinear(img, [224, 224]); 
-        //  img = img.div(tf.scalar(255.0));
-        //  return img.expandDims(0);
-        //});
-
+        // Prediksi Model AI Scanner
         let prediction;
         if (model.predict) {
             prediction = await model.predict(tensor).data();
         } else if (model.execute) {
             prediction = await model.execute(tensor).data();
         }
-        
         const maxProbability = Math.max(...prediction);
         const classIndex = prediction.indexOf(maxProbability);
         const detectedLabel = CLASSES[classIndex] || "Tidak Dikenali";
@@ -229,34 +202,37 @@ const AIScanner = () => {
         tensor.dispose();
         setAnalyzing(false);
 
-        // 2. ANALISIS DOKTER AI (Gemini RAG)
-        // Hanya panggil jika confidence > 50%
-        if (maxProbability > 0.5) {
-          const medicalContext = skinKnowledgeBase[detectedLabel] || {};
-          const {
-            description = "-",
-            causes = "",
-            treatments = "",
-            urgency = ""
-          } = medicalContext;
+        // ANALISIS Model AI (Backend RAG & Gemini)
+        // Sesuaikan dengan confidence Score yang di inginkan contoh( > 40% )
+        if (maxProbability > 0.1) {
+          setLoadingGemini(true);
+          try {
+             console.log("Memanggil Backend RAG untuk:", detectedLabel);
+             // Fungsi dari AIScanner
+             const ragData = await analyzeSkinCondition(detectedLabel);           
+             // Data dari backend: { description, causes, treatments, urgency }
+             const summary = [
+                `**${detectedLabel}**`,
+                ragData.description || "Tidak ada deskripsi.",
+                "",
+                "**Penyebab utama:**",
+                ragData.causes || "-",
+                "",
+                "**Perawatan yang disarankan:**",
+                ragData.treatments || "-",
+                "",
+                "**Urgensi:**",
+                ragData.urgency || "-"
+             ].join("\n");
 
-          const summary = [
-            `**${detectedLabel}**`,
-            description,
-            "",
-            "**Penyebab utama:**",
-            causes || "-",
-            "",
-            "**Perawatan yang disarankan:**",
-            treatments || "-",
-            "",
-            "**Urgensi:**",
-            urgency || "-"
-          ].join("\n");
+             setGeminiAnalysis(summary);
 
-          setGeminiAnalysis(summary);
-          setShowFullAnalysis(false);
-          setLoadingGemini(false);
+          } catch (err) {
+             console.error("Gagal RAG:", err);
+             setGeminiAnalysis("Gagal memuat analisis dari server.");
+          } finally {
+             setLoadingGemini(false);
+          }
         }
 
       } catch (err) {
@@ -319,11 +295,11 @@ const AIScanner = () => {
               <div className="flex flex-col justify-center">
                 {!result && !analyzing && (
                   <div className="space-y-6">
-                     <div className="p-4 border rounded-lg bg-slate-700/50 border-slate-600">
+                      <div className="p-4 border rounded-lg bg-slate-700/50 border-slate-600">
                         <h4 className="flex items-center gap-2 mb-2 font-semibold"><CheckCircle size={16} className="text-teal-400"/> Foto Siap</h4>
                         <p className="text-sm text-slate-400">AI akan melakukan deteksi visual lalu memberikan penjelasan medis.</p>
-                     </div>
-                     <button onClick={startAnalysis} disabled={!model} className="flex items-center justify-center w-full gap-2 py-4 font-bold text-white transition bg-teal-600 shadow-lg hover:bg-teal-500 disabled:bg-slate-600 rounded-xl">
+                      </div>
+                      <button onClick={startAnalysis} disabled={!model} className="flex items-center justify-center w-full gap-2 py-4 font-bold text-white transition bg-teal-600 shadow-lg hover:bg-teal-500 disabled:bg-slate-600 rounded-xl">
                         <Scan size={20} /> {model ? "Analisis Lengkap" : "Tunggu Model..."}
                       </button>
                       <button onClick={resetScan} className="w-full py-2 text-sm text-slate-400 hover:text-white">Ganti Foto</button>

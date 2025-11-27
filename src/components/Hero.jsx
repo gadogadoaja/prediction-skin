@@ -41,7 +41,7 @@ const Hero = () => {
               Mulai Analisis
             </a>
             
-            {/* Tombol 2: Ke Cara Kerja (Diubah dari <button> ke <a>) */}
+            {/* Tombol 2: Ke Cara Kerja */}
             <a 
               href="#how-it-works" 
               onClick={(e) => scrollToSection(e, 'how-it-works')}

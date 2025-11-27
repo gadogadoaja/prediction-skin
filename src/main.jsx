@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// PERBAIKAN ADA DI BARIS BAWAH INI:
 import App from './App.jsx' 
 import './index.css'
 
