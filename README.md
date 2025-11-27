@@ -7,11 +7,11 @@ Sebelum menjalankan, pastikan di komputer sudah terinstall:
 🚀 Cara Menjalankan Proyek (Langkah demi Langkah)
 
 Langkah 1: Setup Environment Variables (.env)
-Di Folder Backend:
-Buat file bernama .env di dalam folder backend/, isi dengan:
-PORT=5000
-GEMINI_API_KEY=MASUKKAN_API_KEY_GEMINI_KAMU_DISINI
-CHROMA_DB_URL=http://localhost:8000
+-Di Folder Backend:
+-Buat file bernama .env di dalam folder backend/, isi dengan:
+-PORT=5000
+-GEMINI_API_KEY=MASUKKAN_API_KEY_GEMINI_KAMU_DISINI
+-CHROMA_DB_URL=http://localhost:8000
 
 Langkah 2: Menyalakan Database (Docker)
 Database vektor (ChromaDB) berjalan di Docker.
