@@ -1,70 +1,136 @@
 🩺 DermaSmart AI - Fullstack Skin Detection App
 
-Aplikasi deteksi penyakit kulit menggunakan Computer Vision (TensorFlow.js) dan RAG Chatbot (Gemini AI + ChromaDB).
+<div align="center">
 
-DermaSmart AI menggabungkan kecerdasan buatan visual dan tekstual untuk membantu deteksi dini masalah kulit serta memberikan konsultasi medis berbasis data yang akurat.
+</div>
+
+Aplikasi deteksi penyakit kulit cerdas menggunakan Computer Vision dan RAG Chatbot.
+
+DermaSmart AI adalah solusi kesehatan digital yang menggabungkan analisis gambar real-time (Computer Vision) dan konsultasi medis interaktif (Chatbot RAG) untuk membantu deteksi dini masalah kulit dengan akurasi berbasis data.
+
+📑 Daftar Isi
+
+Fitur Utama
+
+Teknologi
+
+Prasyarat
+
+Instalasi & Penggunaan
+
+Struktur Folder
+
+✨ Fitur Utama
+
+🔍 Deteksi Penyakit Kulit: Analisis visual instan menggunakan model Deep Learning TensorFlow.js.
+
+💬 Smart Chatbot (RAG): Konsultasi medis kontekstual menggunakan Gemini AI yang terhubung dengan database medis (ChromaDB).
+
+📚 Knowledge Base: Chatbot memiliki ingatan jangka panjang dari dokumen medis yang telah di-seed.
+
+🛠 Teknologi
+
+Komponen
+
+Teknologi
+
+Deskripsi
+
+Frontend
+
+React + Vite
+
+Antarmuka pengguna yang cepat dan responsif.
+
+Backend
+
+Node.js + Express
+
+API server untuk menangani request dan logika AI.
+
+AI Vision
+
+TensorFlow.js
+
+Menjalankan model klasifikasi gambar langsung di browser.
+
+AI Chat
+
+Gemini AI + RAG
+
+LLM canggih untuk pemahaman bahasa alami.
+
+Database
+
+ChromaDB
+
+Vector Database untuk pencarian konteks medis yang cepat.
+
+DevOps
+
+Docker
+
+Isolasi environment database agar mudah dijalankan.
 
 📋 Prasyarat (Wajib Install)
 
-Sebelum menjalankan aplikasi, pastikan di komputer kamu sudah terinstall software berikut:
+Sebelum memulai, pastikan tools berikut sudah terinstall di komputermu:
 
-Docker Desktop (Wajib untuk menjalankan database ChromaDB).
+Docker Desktop Wajib untuk menjalankan database ChromaDB.
 
-Node.js (Untuk menjalankan server backend dan frontend).
+Node.js (Versi 16 atau lebih baru) Runtime environment untuk menjalankan server backend dan frontend.
 
 🚀 Cara Menjalankan Proyek (Langkah demi Langkah)
 
-Ikuti urutan langkah di bawah ini agar aplikasi berjalan lancar tanpa error.
+Ikuti panduan ini secara berurutan untuk pengalaman pengembangan yang lancar.
 
 Langkah 1: Setup Environment Variables (.env)
 
-Kita perlu mengatur kunci API dan konfigurasi server terlebih dahulu.
+Kita perlu mengatur kunci rahasia agar aplikasi bisa berkomunikasi dengan layanan Google AI.
 
 Masuk ke folder backend/.
 
 Buat file baru bernama .env.
 
-Isi file tersebut dengan kode konfigurasi berikut:
+Salin konfigurasi di bawah ini:
 
 PORT=5000
 GEMINI_API_KEY=MASUKKAN_API_KEY_GEMINI_KAMU_DISINI
 CHROMA_DB_URL=http://localhost:8000
 
 
-Catatan: Ganti MASUKKAN_API_KEY_GEMINI_KAMU_DISINI dengan API Key asli dari Google AI Studio kamu.
+Tips: Dapatkan API Key gratis di Google AI Studio.
 
 Langkah 2: Menyalakan Database (Docker)
 
 Database vektor (ChromaDB) berjalan di dalam container Docker.
 
-Buka aplikasi Docker Desktop dan pastikan statusnya sudah Running.
+Buka aplikasi Docker Desktop (pastikan statusnya Running).
 
-Buka terminal (Command Prompt atau PowerShell), lalu jalankan perintah ini:
+Jalankan perintah ini di terminal:
 
 docker run -p 8000:8000 chromadb/chroma
 
 
-⚠️ Penting: Biarkan terminal ini tetap terbuka selama kamu menggunakan aplikasi. Jangan ditutup!
+⚠️ Penting: Biarkan terminal ini tetap terbuka selama kamu menggunakan aplikasi.
 
 Langkah 3: Mengisi Data Penyakit (Seeding)
 
-Saat pertama kali dijalankan, database masih kosong. Kita perlu memasukkan data (seeding) dari file PDF ke dalam ChromaDB agar Chatbot memiliki pengetahuan (knowledge base).
+Saat pertama kali dijalankan, database masih kosong. Kita perlu "menyuapi" Chatbot dengan data medis.
 
-Pastikan terminal Docker (Langkah 2) masih berjalan.
+Buka terminal baru (biarkan terminal Docker tetap jalan).
 
-Buka terminal baru, lalu masuk ke folder backend.
-
-Jalankan perintah berikut untuk mengisi database:
+Masuk ke folder backend dan jalankan:
 
 node src/utils/seedDatabase.js
 
 
 Langkah 4: Menjalankan Aplikasi
 
-Langkah terakhir adalah menyalakan Server Backend dan Frontend React. Kamu butuh dua terminal berbeda untuk ini.
+Sekarang saatnya menyalakan mesin utama! Gunakan dua terminal terpisah.
 
 A. Jalankan Backend Server
-Di terminal yang berada di folder backend, jalankan:
+Di terminal folder backend:
 
 npm start
 
@@ -72,15 +138,30 @@ npm start
 (Server akan berjalan di port 5000)
 
 B. Jalankan Frontend React
-Buka terminal baru lagi, arahkan ke folder root (folder utama proyek), lalu jalankan:
+Buka terminal baru di folder root (folder utama proyek):
 
 npm run dev
 
 
-(Aplikasi web akan terbuka di browser)
+(Klik link localhost yang muncul untuk membuka aplikasi di browser)
+
+📂 Struktur Folder
+
+Gambaran singkat struktur proyek untuk memudahkan navigasi:
+
+derma-smart/
+├── backend/            # Server Node.js, Logika AI, & ChromaDB Client
+│   ├── src/
+│   │   ├── utils/      # Script seeding & helper fungsi
+│   │   └── index.js    # Entry point server
+│   └── .env            # File konfigurasi (TIDAK BOLEH DI-PUSH KE GITHUB)
+├── src/                # Kode Frontend React (Komponen, Halaman, Aset)
+├── package.json        # Daftar dependensi proyek
+└── README.md           # Dokumentasi proyek ini
+
 
 🎉 Selesai!
 
-Aplikasi siap digunakan.
+Aplikasi siap digunakan untuk mendeteksi dan berkonsultasi.
 
 SELAMAT BEKERJA GESS! 🚀
