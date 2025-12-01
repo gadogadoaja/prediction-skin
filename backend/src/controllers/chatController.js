@@ -57,10 +57,7 @@ const handleChat = async (req, res) => {
         ${contextText}
 
         PERTANYAAN PENGGUNA:
-        ${message}
-
-        INFORMASI REFERENSI nama penyakit yang diagnosis '${label}'
-        
+        ${message}        
 
         PANDUAN MENJAWAB:
         1. Jawablah dengan sopan, empatik, dan menggunakan Bahasa Indonesia yang baik.
@@ -69,7 +66,7 @@ const handleChat = async (req, res) => {
         4. Jangan membuat diagnosis medis final, selalu sarankan pemeriksaan fisik jika gejalanya parah.
         5. Untuk pertanyaan kedua dan seterusnya, langsung saja kasih jawabannya kepada pengguna, tanpa menjelaskan siapa anda dan 'Berdasarkan informasi yang saya pelajari dari dokumen medis'.
         6. Jika ada pertanyaan Saran untuk pengobatan, buatkan dalam markdown untuk jawabannya, contohnya seperti 1. A, 2.B
-        7. Jika ada pertanyaan yang berkaitan dengan hasil diagnosis atau prediksi AI, ambil referensi nama penyakitnya dari '${label}'
+        7. Jika ada pertanyaan yang berkaitan dengan hasil diagnosis atau prediksi AI, ambil referensi nama penyakitnya dari Hasil prediksi 'AIScanner'
       `;
 
     // Generate

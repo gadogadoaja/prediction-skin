@@ -57,7 +57,7 @@ const AIScanner = () => {
     'Whiteheads'
   ];
 
-  // FUNGSI LOADER MANUAL  ---
+  // FUNGSI LOADER MANUAL 
   const loadModelManual = async () => {
     const modelUrl = '/model/model.json';
     const weightBaseUrl = `${window.location.origin}/model/`;
