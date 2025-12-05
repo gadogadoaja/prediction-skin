@@ -35,13 +35,10 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="relative grid gap-8 md:grid-cols-4">
-          {/* Garis penghubung (Hanya tampil di layar Desktop) */}
+        <div className="relative grid gap-8 md:grid-cols-4">         
           <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 -z-10"></div>
-
           {steps.map((step, index) => (
             <div key={index} className="relative flex flex-col items-center text-center group">
-              {/* Lingkaran Icon */}
               <div className="z-10 flex items-center justify-center w-24 h-24 mb-6 text-teal-600 transition duration-300 bg-white border-4 rounded-full shadow-sm border-teal-50 group-hover:scale-110 group-hover:border-teal-200">
                 {step.icon}
               </div>

@@ -2,9 +2,9 @@ import React from 'react';
 import { Activity, Camera } from 'lucide-react';
 
 const Hero = () => {
-  // Fungsi agar saat tombol diklik, halaman menggulir (scroll) dengan mulus
+  // Fuction Scroll 
   const scrollToSection = (e, id) => {
-    e.preventDefault(); // Mencegah perilaku default link agar bisa kita kontrol
+    e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -29,9 +29,8 @@ const Hero = () => {
             Pahami kesehatan kulitmu secara instan. Dapatkan deteksi dini dan solusi perawatan yang tepat dengan bantuan AI.
           </p>
           
-          {/* --- BAGIAN TOMBOL DIPERBAIKI DI SINI --- */}
           <div className="flex flex-col gap-4 sm:flex-row">
-            {/* Tombol 1: Ke Scanner */}
+            {/* Scanner */}
             <a 
               href="#scan" 
               onClick={(e) => scrollToSection(e, 'scan')}
@@ -41,7 +40,7 @@ const Hero = () => {
               Mulai Analisis
             </a>
             
-            {/* Tombol 2: Ke Cara Kerja */}
+            {/* HowItWorks */}
             <a 
               href="#how-it-works" 
               onClick={(e) => scrollToSection(e, 'how-it-works')}
@@ -50,7 +49,6 @@ const Hero = () => {
               Pelajari Cara Kerja
             </a>
           </div>
-          {/* ---------------------------------------- */}
 
           <div className="flex items-center gap-4 pt-4 text-sm text-slate-500">
             <div className="flex -space-x-2">
@@ -66,12 +64,11 @@ const Hero = () => {
         <div className="relative">
           <div className="relative z-10 p-6 transition duration-500 transform bg-white border shadow-2xl rounded-3xl border-slate-100 rotate-2 hover:rotate-0">
              <img 
-              src="/model/foto/health2.jpg" 
+              src="4" 
               alt="Dermatology AI Interface" 
               className="rounded-2xl w-full h-[400px] object-cover"
             />
           </div>
-          {/* Decorative Circles */}
           <div className="absolute w-64 h-64 bg-teal-100 rounded-full opacity-50 -top-10 -right-10 blur-3xl -z-10"></div>
           <div className="absolute w-64 h-64 bg-blue-100 rounded-full opacity-50 -bottom-10 -left-10 blur-3xl -z-10"></div>
         </div>

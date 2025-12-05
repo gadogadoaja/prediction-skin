@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-// Import fungsi baru yang memanggil backend
+// Import fungsi yang memanggil backend
 import { sendMessageToBackend } from '../utils/geminiService';
 
-// --- BAGIAN IKON (Tosca Theme) ---
 const RobotIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="2">
     <rect x="3" y="11" width="18" height="10" rx="2" className="fill-teal-500/20 stroke-teal-400" />
@@ -33,7 +32,7 @@ const XIcon = () => (
   </svg>
 );
 
-// --- KOMPONEN UTAMA ---
+// KOMPONEN UTAMA 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false); 
   const [input, setInput] = useState('');
@@ -62,7 +61,7 @@ const ChatBot = () => {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen]);
 
-  // --- HANDLE KIRIM PESAN ---
+  // HANDLE KIRIM PESAN 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -70,14 +69,14 @@ const ChatBot = () => {
     setInput('');
     setIsLoading(true);
 
-    // 1. Tampilkan pesan user di UI
+    // Tampilkan pesan user di UI
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
 
     try {
-      // 2. Kirim ke Backend (Server yang mencari data di PDF)
+      // Kirim ke Backend (Server yang mencari data di PDF)
       const botResponse = await sendMessageToBackend(userMsg);
       
-      // 3. Tampilkan balasan dari Backend
+      // Tampilkan balasan dari Backend
       setMessages(prev => [...prev, { role: 'bot', text: botResponse }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: 'bot', text: 'Maaf, server sedang sibuk atau tidak terhubung. Pastikan backend sudah jalan.' }]);
@@ -86,7 +85,7 @@ const ChatBot = () => {
     }
   };
 
-  // --- TAMPILAN SAAT TERTUTUP (Tombol Bulat Tosca) ---
+
   if (!isOpen) {
     return (
       <button
@@ -101,7 +100,7 @@ const ChatBot = () => {
     );
   }
 
-  // --- TAMPILAN SAAT TERBUKA (Jendela Chat) ---
+
   return (
     <div className="fixed bottom-6 right-6 z-50 w-[350px] md:w-[380px] h-[500px] flex flex-col bg-[#2B2D31] rounded-xl shadow-2xl border border-gray-700 overflow-hidden font-sans animate-fade-in-up">
       
@@ -134,8 +133,8 @@ const ChatBot = () => {
             <div 
               className={`max-w-[85%] p-3 text-sm rounded-2xl leading-relaxed shadow-sm ${
                 msg.role === 'user' 
-                  ? 'bg-[#0D9488] text-white rounded-br-none' // Bubble User: Tosca
-                  : 'bg-[#383A40] text-gray-200 border border-gray-600 rounded-tl-none' // Bubble Bot: Dark Grey
+                  ? 'bg-[#0D9488] text-white rounded-br-none' 
+                  : 'bg-[#383A40] text-gray-200 border border-gray-600 rounded-tl-none' 
               }`}
             >
               {msg.text}
