@@ -1,6 +1,5 @@
 import React from 'react';
 import { Activity, Camera } from 'lucide-react';
-
 const Hero = () => {
   // Fuction Scroll 
   const scrollToSection = (e, id) => {
@@ -64,7 +63,7 @@ const Hero = () => {
         <div className="relative">
           <div className="relative z-10 p-6 transition duration-500 transform bg-white border shadow-2xl rounded-3xl border-slate-100 rotate-2 hover:rotate-0">
              <img 
-              src="4" 
+              src="public/foto/health2.jpg" 
               alt="Dermatology AI Interface" 
               className="rounded-2xl w-full h-[400px] object-cover"
             />
