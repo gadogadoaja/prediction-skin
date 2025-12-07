@@ -26,7 +26,7 @@ const Doctors = () => {
         <div className="flex flex-col items-end justify-between mb-12 md:flex-row">
           <div>
             <h2 className="mb-2 text-3xl font-bold text-slate-900">Tim Dokter Ahli</h2>
-            <p className="text-slate-600">Validator medis dibalik algoritma AI kami.</p>
+            <p className="text-slate-600">Validator medis dibalik AI kami.</p>
           </div>
           <a href="#" className="flex items-center mt-4 font-semibold text-teal-600 transition-all md:mt-0 hover:gap-2">
             Lihat Semua <ChevronRight size={20} />
